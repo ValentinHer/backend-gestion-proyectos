@@ -48,3 +48,7 @@ Backend de una aplicación de gestión de proyectos, usando Python con [FastAPI]
     ```
     fastapi dev app/main.py
     ``` 
+    o 
+    ```
+    uvicorn app.main:app --reload --host localhost --port 8000
+    ```

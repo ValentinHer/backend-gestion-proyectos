@@ -15,10 +15,11 @@ def get_users(response: Response):
     response.status_code = status.HTTP_200_OK
     return user_service.get_users()
 
-@router.get("/{id}/projects")
-def get_projects_by_user_id(id: str, response: Response, current_user: Annotated[User, Depends(user_service.get_current_user)]):
+@router.get("/user/projects")
+def get_projects_by_user_id(response: Response, current_user: Annotated[User, Depends(user_service.get_current_user)]):
     response.status_code = status.HTTP_200_OK
-    return user_service.get_projects_by_user_id(id)
+    id_user = current_user["_id"]
+    return user_service.get_projects_by_user_id(id_user)
 
 @router.put("/{id}")
 def update_user(id: str, user: User, response: Response, current_user: Annotated[User, Depends(user_service.get_current_user)]):

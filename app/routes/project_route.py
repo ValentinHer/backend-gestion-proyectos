@@ -9,6 +9,7 @@ router = APIRouter(prefix="/projects")
 
 @router.post("/")
 def create_project(project: Project, response: Response, current_user: Annotated[User, Depends(get_current_user)]):
+    project.user_id = current_user["_id"]
     response.status_code = status.HTTP_201_CREATED
     return project_service.create_project(project)
 
