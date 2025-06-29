@@ -19,7 +19,8 @@ def get_tasks_by_project_id(id: str, current_user: Annotated[User, Depends(get_c
 
 @router.put("/{id}")
 def update_project(id: str, project: Project, response: Response, current_user: Annotated[User, Depends(get_current_user)]):
-    result = project_service.update_project(id, project)
+    user_id = current_user["_id"]
+    result = project_service.update_project(id, project, user_id)
     if result.get("status") == 404: response.status_code = status.HTTP_404_NOT_FOUND
     elif result.get("status") == 200: response.status_code = status.HTTP_200_OK
 

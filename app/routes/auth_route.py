@@ -11,10 +11,6 @@ router = APIRouter(prefix="/auth")
 def login(login: LoginModel, response: Response):
     token = user_login(login)
     response.set_cookie(key="token", value=token, httponly=True, secure=False, path="/", samesite="lax")
-    # Establecer la cookie manualmente con Partitioned
-    # response.headers["Set-Cookie"] = (
-    #     f"token={token}; Path=/; HttpOnly; SameSite=Lax; Partitioned"
-    # )    
     response.status_code = status.HTTP_200_OK
     return {"message": "Login Exitoso", "status": status.HTTP_200_OK}
 
